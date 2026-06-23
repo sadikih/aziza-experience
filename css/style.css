@@ -417,3 +417,65 @@ body::before {
             rotate(360deg);
     }
 }
+
+/* ========================= */
+/* RESPONSIVE FOUNDATION */
+/* ========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* allow layout to adapt instead of forcing single row */
+.vault-body {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+/* make display card fluid */
+.vault-display {
+    width: min(340px, 90vw);
+    min-height: 320px;
+}
+
+/* replace fixed grid with adaptive grid */
+.vault-grid {
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+    width: min(420px, 95vw);
+}
+
+/* make each number fully responsive */
+.vault-num {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+}
+
+/* vault header scaling */
+.vault-header h1 {
+    font-size: clamp(1.6rem, 4vw, 2.5rem);
+}
+
+/* display number scaling */
+.display-card {
+    font-size: clamp(3rem, 8vw, 6rem);
+}
+
+/* final screen container */
+.final-content {
+    width: min(600px, 92vw);
+    padding: 20px;
+}
+
+/* final text scaling */
+#finalText {
+    font-size: clamp(1rem, 2vw, 1.1rem);
+    line-height: 1.6;
+}
