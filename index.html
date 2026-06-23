@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Aziza</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- INTRO -->
+    <div class="intro-screen">
+        <div class="intro-text">
+            <h1 id="line1"></h1>
+            <h2 id="line2"></h2>
+            <button id="enterBtn">Enter the experience ✨</button>
+        </div>
+    </div>
+
+    <!-- EXPERIENCE -->
+    <div id="experience" class="hidden">
+
+        <div class="cinema">
+            <div class="vault">
+
+                <div class="vault-header">
+    <h1>24 Little Things That Make Aziza, Aziza</h1>
+    <p>
+        Some are obvious.<br>
+        Some you probably don't even realize.<br>
+        Click the number to reveal...
+    </p>
+</div>
+
+                <div class="vault-body">
+
+                    <div class="vault-display">
+                        <div class="display-card" id="displayCard">?</div>
+                        <div id="displayText" class="display-text"></div>
+                    </div>
+
+                    <div class="vault-grid" id="vaultGrid"></div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- FINAL SCREEN -->
+    <div id="finalScene" class="final hidden">
+
+    <div class="petals">
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+        <span class="petal"></span>
+    </div>
+        <div class="final-content">
+
+    <div class="glass-card">
+        <h1>Happy 24th Birthday</h1>
+        <h2>Aziza Hussein</h2>
+
+        <div id="finalText"></div>
+
+        <button id="replayBtn">Replay Experience</button>
+    </div>
+
+</div>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="assets/music/music.mp3" type="audio/mp3">
+    </audio>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
