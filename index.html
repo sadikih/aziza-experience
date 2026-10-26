@@ -3,86 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Aziza</title>
+    <meta name="theme-color" content="#14050b">
+    <meta name="description" content="A little birthday experience, made with love for Aziza.">
+    <title>For Aziza ♡</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💗</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <!-- INTRO -->
-    <div class="intro-screen">
-        <div class="intro-text">
-            <h1 id="line1"></h1>
-            <h2 id="line2"></h2>
-            <button id="enterBtn">Enter the experience ✨</button>
+    <!-- dreamy floating hearts + twinkles -->
+    <canvas id="sky" aria-hidden="true"></canvas>
+    <canvas id="fx" aria-hidden="true"></canvas>
+    <div class="flash" id="flash" aria-hidden="true"></div>
+    <div class="dim" id="dim" aria-hidden="true"></div>
+    <div class="curtain" id="curtain" aria-hidden="true"><p class="curtain-text script" id="curtainText"></p></div>
+
+    <svg class="defs" aria-hidden="true" focusable="false">
+        <defs>
+            <linearGradient id="heartFill" x1="0" y1="0" x2="0.4" y2="1">
+                <stop offset="0" stop-color="#ff9cb3"/>
+                <stop offset="0.55" stop-color="#e2456f"/>
+                <stop offset="1" stop-color="#a3163f"/>
+            </linearGradient>
+        </defs>
+    </svg>
+    <div class="glow glow-a" aria-hidden="true"></div>
+    <div class="glow glow-b" aria-hidden="true"></div>
+
+    <button id="soundBtn" class="sound-btn" aria-label="Mute sound" title="Sound">
+        <span class="sound-on">♪</span><span class="sound-off">♪̸</span>
+    </button>
+
+    <!-- 1 · THE ENVELOPE -->
+    <section id="sceneEnvelope" class="scene is-active" aria-label="A letter for Aziza">
+        <p class="eyebrow">someone left you something</p>
+
+        <div class="envelope" id="envelope">
+            <div class="env-back"></div>
+            <div class="env-letter">
+                <span class="script">For you</span>
+            </div>
+            <div class="env-pocket"></div>
+            <div class="env-flap"></div>
+            <button class="seal" id="sealBtn" aria-label="Break the seal and open the letter">
+                <svg viewBox="0 0 32 29" aria-hidden="true"><path d="M16 28.5S1 19.6 1 9.3C1 4.6 4.6 1 9 1c3 0 5.6 1.6 7 4 1.4-2.4 4-4 7-4 4.4 0 8 3.6 8 8.3 0 10.3-15 19.2-15 19.2z"/></svg>
+            </button>
+            <p class="env-name script">Aziza</p>
         </div>
-    </div>
 
-    <!-- EXPERIENCE -->
-    <div id="experience" class="hidden">
+        <p class="hint" id="sealHint">tap the little heart to open</p>
+    </section>
 
-        <div class="cinema">
-            <div class="vault">
+    <!-- 1b · THE OPENING LETTER -->
+    <section id="sceneIntro" class="scene" aria-label="Before you begin">
+        <article class="paper">
+            <p class="script paper-greeting">My dearest Aziza,</p>
+            <div class="intro-lines" id="introLines"></div>
+            <button class="btn btn-primary" id="beginBtn">
+                <span>Open my heart</span> <span class="btn-heart">♥</span>
+            </button>
+        </article>
+    </section>
 
-                <div class="vault-header">
-    <h1>24 Little Things That Make Aziza, Aziza</h1>
-    <p>
-        Some are obvious.<br>
-        Some you probably don't even realize.<br>
-        Click the number to reveal...
-    </p>
-</div>
+    <!-- 2 · TWENTY-FOUR LITTLE THINGS -->
+    <section id="sceneHearts" class="scene" aria-label="24 little things">
+        <header class="hearts-head">
+            <p class="eyebrow">one for every beautiful year</p>
+            <h1 class="title">24 Little Things <em>I Love About You</em></h1>
+        </header>
 
-                <div class="vault-body">
+        <div class="hearts-body">
+            <div class="note-wrap">
+                <div class="note" id="note" aria-live="polite">
+                    <span class="note-num script" id="noteNum">♡</span>
+                    <p class="note-text" id="noteText">Each heart is holding a secret.<br>Tap one, any one, and let it tell you.</p>
+                    <span class="note-sign" id="noteSign"></span>
+                </div>
+            </div>
 
-                    <div class="vault-display">
-                        <div class="display-card" id="displayCard">?</div>
-                        <div id="displayText" class="display-text"></div>
-                    </div>
+            <div class="hearts-side">
+                <div class="heart-grid" id="heartGrid" role="group" aria-label="Choose a heart"></div>
 
-                    <div class="vault-grid" id="vaultGrid"></div>
-
+                <div class="progress" aria-hidden="true">
+                    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+                    <p class="progress-label"><span id="progressCount">0</span> of 24 opened</p>
                 </div>
 
+                <button class="btn btn-primary btn-next" id="toCakeBtn" hidden>
+                    <span>There's one more surprise</span> <span class="btn-heart">♥</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3 · MAKE A WISH -->
+    <section id="sceneCake" class="scene" aria-label="Make a wish">
+        <header class="cake-head">
+            <p class="eyebrow">close your eyes for a second</p>
+            <h2 class="title"><em>Make a wish,</em> Aziza</h2>
+            <p class="sub" id="cakeSub">then tap the flames — or blow on them, for real</p>
+        </header>
+
+        <div class="cake-stage">
+            <div class="cake" id="cake">
+                <div class="candles">
+                    <button class="candle" data-candle aria-label="Blow out the 2 candle">
+                        <span class="flame"></span><span class="wick"></span><span class="candle-num">2</span>
+                    </button>
+                    <button class="candle" data-candle aria-label="Blow out the 4 candle">
+                        <span class="flame"></span><span class="wick"></span><span class="candle-num">4</span>
+                    </button>
+                </div>
+                <div class="tier tier-top"><span class="drip"></span></div>
+                <div class="tier tier-mid"><span class="drip"></span><span class="pearls"></span></div>
+                <div class="tier tier-base"><span class="drip"></span><span class="script tier-name">Aziza</span></div>
+                <div class="plate"></div>
             </div>
         </div>
 
-    </div>
+        <div class="cake-actions">
+            <button class="btn btn-ghost" id="micBtn">🎤 Blow for real</button>
+            <button class="btn btn-primary" id="toLetterBtn" hidden>
+                <span>Read the last page</span> <span class="btn-heart">♥</span>
+            </button>
+        </div>
+    </section>
 
-    <!-- FINAL SCREEN -->
-    <div id="finalScene" class="final hidden">
+    <!-- 4 · THE LAST PAGE -->
+    <section id="sceneFinal" class="scene scene-final" aria-label="Happy birthday">
+        <div class="final-bg" aria-hidden="true"></div>
+        <div class="petals" id="petals" aria-hidden="true"></div>
 
-    <div class="petals">
-        <span class="petal"></span>
-        <span class="petal"></span>
-        <span class="petal"></span>
-        <span class="petal"></span>
-        <span class="petal"></span>
-        <span class="petal"></span>
-        <span class="petal"></span>
-        <span class="petal"></span>
-        <span class="petal"></span>
-        <span class="petal"></span>
-        <span class="petal"></span>
-        <span class="petal"></span>
-    </div>
-        <div class="final-content">
+        <article class="final-card">
+            <p class="eyebrow">today, and every day after</p>
+            <h1 class="final-title script">Happy 24th Birthday</h1>
+            <h2 class="final-name">Aziza Hussein</h2>
 
-    <div class="glass-card">
-        <h1>Happy 24th Birthday</h1>
-        <h2>Aziza Hussein</h2>
+            <div class="final-lines" id="finalLines"></div>
 
-        <div id="finalText"></div>
+            <div class="final-actions" id="finalActions">
+                <button class="hug-btn" id="hugBtn" aria-label="Press and hold to receive a hug">
+                    <svg class="hug-ring" viewBox="0 0 120 120" aria-hidden="true">
+                        <circle cx="60" cy="60" r="54" class="hug-track"/>
+                        <circle cx="60" cy="60" r="54" class="hug-progress" id="hugProgress"/>
+                    </svg>
+                    <span class="hug-heart">♥</span>
+                </button>
+                <p class="hug-label" id="hugLabel" aria-live="polite">press &amp; hold for a hug</p>
+                <button class="btn btn-ghost" id="replayBtn">↺ Live it again</button>
+            </div>
+        </article>
+    </section>
 
-        <button id="replayBtn">Replay Experience</button>
-    </div>
-
-</div>
-    </div>
-
-    <audio id="bgMusic" loop>
-        <source src="assets/music/music.mp3" type="audio/mp3">
+    <audio id="bgMusic" loop preload="auto">
+        <source src="assets/music/music.mp3" type="audio/mpeg">
     </audio>
 
+    <script src="js/vendor/gsap.min.js"></script>
+    <script src="js/vendor/SplitText.min.js"></script>
+    <script src="js/vendor/CustomEase.min.js"></script>
+    <script src="js/vendor/MotionPathPlugin.min.js"></script>
+    <script src="js/vendor/confetti.browser.min.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>
